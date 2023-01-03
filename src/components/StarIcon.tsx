@@ -24,7 +24,6 @@ export const StarIcon: FC<{ className?: string }> = (props) => {
       className={props.className}
       viewBox="0 0 24 24"
       fill="currentColor"
-      className="w-6 h-6"
     >
       <path
         fillRule="evenodd"
