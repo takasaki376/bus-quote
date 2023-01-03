@@ -1,34 +1,111 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 初期セットアップ
 
-## Getting Started
+## Next.js
 
-First, run the development server:
+```
+yarn create next-app . --typescript --eslint
+```
 
-```bash
-npm run dev
-# or
+## 必要 module のインストール
+
+```
+yarn add -D prettier eslint-config-prettier @typescript-eslint/eslint-plugin @typescript-eslint/parser
+```
+
+## tsconfig.json 設定変更
+
+`"compilerOptions": {`の最終行に、`"baseUrl": "."`を追加する
+
+## next.config.js 設定変更
+
+`pageExtensions: ["page.tsx", "page.ts"],`を追加する。
+
+```
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  pageExtensions: ["page.tsx", "page.ts"],
+}
+module.exports = nextConfig
+```
+
+## ファイル名変更
+
+- `src\pages\_app.tsx` -> `src\pages\_app.page.tsx`
+- `src\pages\index.tsx` -> `src\pages\index.page.tsx`
+- `src\pages\api\hello.ts` -> `src\pages\api\hello.page.ts`
+
+# tailwind css
+
+## [インストール](https://tailwindcss.com/docs/guides/nextjs)
+
+```
+yarn add -D tailwindcss postcss autoprefixer
+yarn add -D eslint-plugin-tailwindcss
+yarn add -D prettier-plugin-tailwind
+```
+
+## tailwind.config.js, postcss.config.js の生成
+
+```
+npx tailwindcss init -p
+```
+
+## tailwind.config.js の 設定追加
+
+- content にパスを追記する。パスの対象となる tsx ファイルの中身を tailwind から css に変換される。
+
+```
+module.exports = {
+  content: ["./src/**/**/*.{ts,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+## globals.css の編集
+
+```
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+# VS code 設定
+
+## vs code のワークスペース設定
+
+validate チェック off
+
+# 起動確認
+
+## index.page.tsx の変更
+
+```
+import type { NextPage } from 'next'
+const Home: NextPage = () => {
+  return (
+    <h1 className="text-xl font-bold underline text-red-600">
+      Hello world!
+    </h1>
+  )
+}
+export default Home
+```
+
+## 開発サーバ起動
+
+```
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Google map
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## インストール
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+yarn add @heroicons/react date-fns @mantine/core @mantine/hooks @mantine/next @emotion/server @emotion/react microcms-js-sdk classcat html-react-parser
+yarn add -D @tailwindcss/line-clamp
+```
