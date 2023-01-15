@@ -11,7 +11,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const newsList = await client.get({ endpoint: "news" });
   return {
     props: { newsList: newsList },
-    revalidate: 30,
+    revalidate: 10,
   };
 };
 

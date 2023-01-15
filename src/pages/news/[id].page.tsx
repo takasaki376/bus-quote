@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps<Props, PathProps> = async (ctx) => {
   });
   return {
     props: data,
-    revalidate: 30,
+    revalidate: 10,
   };
 };
 
@@ -29,7 +29,7 @@ export const getStaticPaths: GetStaticPaths<PathProps> = async () => {
   const ids = data.contents.map((content) => `/news/${content.id}`);
   return {
     paths: ids,
-    fallback: false,
+    fallback: true,
   };
 };
 
